@@ -5,39 +5,56 @@ const elements = {
     author: document.getElementById("author"),
 };
 
-const quotes = [
-    {
-        quote: "All hands! Abandon ship!",
-        author: "Captain Picard",
-    },
+async function getRandomImage() {
+    const client_id = "ZopOdAKF3RnX-0NJi3aJqSf6xdP0G1JFq0vqp6q-9KM";
+    const endpoint = `https://api.unsplash.com/photos/random/?client_id=${client_id}`;
+    try {
+        const response = await fetch(endpoint);
+        const returnedData = await response.json()
+        const receivedPhotoUrl = returnedData.urls.regular;
 
-    {
-        quote: "Doh!",
-        author: "Homer Simpson",
-    },
-
-    {
-        quote: "The Internet is the first thing that humanity has built that humanity doesn't understand, the largest experiment in anarchy that we have ever had.",
-        author: "Eric Schmidt",
-    },
-
-    {
-        quote: "I was an ordinary person who studied hard. There are no miracle people. It happens they get interested in this thing and they learn all this stuff, but they're just people.",
-        author: "Richard Feynman",
+        const imgDiv = document.querySelector(".background-img");
+        imgDiv.style.backgroundImage = `url("${receivedPhotoUrl}")`;
+    } catch (error) {
+        console.error(error)
     }
-]
-
-function loopThroughQuotes() {
-    let quoteIndex = 0;
-    setInterval(() => {
-        if (quoteIndex < quotes.length) {
-            elements.quote.textContent = quotes[quoteIndex].quote;
-            elements.author.textContent = quotes[quoteIndex].author;
-            quoteIndex++;
-        } else {
-            quoteIndex = 0;
-        }
-    }, 3000);
 }
 
-setTimeout(loopThroughQuotes, 3000);
+getRandomImage();
+
+// const quotes = [
+//     {
+//         quote: "All hands! Abandon ship!",
+//         author: "Captain Picard",
+//     },
+
+//     {
+//         quote: "Doh!",
+//         author: "Homer Simpson",
+//     },
+
+//     {
+//         quote: "The Internet is the first thing that humanity has built that humanity doesn't understand, the largest experiment in anarchy that we have ever had.",
+//         author: "Eric Schmidt",
+//     },
+
+//     {
+//         quote: "I was an ordinary person who studied hard. There are no miracle people. It happens they get interested in this thing and they learn all this stuff, but they're just people.",
+//         author: "Richard Feynman",
+//     }
+// ]
+
+// function loopThroughQuotes() {
+//     let quoteIndex = 0;
+//     setInterval(() => {
+//         if (quoteIndex < quotes.length) {
+//             elements.quote.textContent = quotes[quoteIndex].quote;
+//             elements.author.textContent = quotes[quoteIndex].author;
+//             quoteIndex++;
+//         } else {
+//             quoteIndex = 0;
+//         }
+//     }, 3000);
+// }
+
+// setTimeout(loopThroughQuotes, 3000);
