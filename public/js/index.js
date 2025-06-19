@@ -6,17 +6,16 @@ const elements = {
 };
 
 async function getRandomImage() {
-    const client_id = "ZopOdAKF3RnX-0NJi3aJqSf6xdP0G1JFq0vqp6q-9KM";
-    const endpoint = `https://api.unsplash.com/photos/random/?client_id=${client_id}`;
+    const endpoint = "http://localhost:8080/api/v1/getRandomImage";
     try {
         const response = await fetch(endpoint);
-        const returnedData = await response.json()
-        const receivedPhotoUrl = returnedData.urls.regular;
+        const returnedData = await response.json();
+        const receivedPhotoUrl = returnedData.data;
 
         const imgDiv = document.querySelector(".background-img");
-        imgDiv.style.backgroundImage = `url("${receivedPhotoUrl}")`;
+        imgDiv.style.backgroundImage = `url(${receivedPhotoUrl})`;
     } catch (error) {
-        console.error(error)
+        console.error(error);
     }
 }
 
